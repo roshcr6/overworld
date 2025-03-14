@@ -1,0 +1,97 @@
+[gd_scene load_steps=12 format=3 uid="uid://bmntjqrbkvnkg"]
+
+[ext_resource type="VideoStream" path="res://Assets/4514642-hd_1920_1080_25fps.ogv" id="1_4bdoq"]
+[ext_resource type="FontFile" uid="uid://ctpdb4q6m0d7e" path="res://Assets/Fonts/Lato,Pixelify_Sans/Pixelify_Sans/PixelifySans-VariableFont_wght.ttf" id="2_gvrxs"]
+[ext_resource type="AudioStream" uid="uid://bi4ln8rl16xqn" path="res://Assets/sounds/orbit-d0d-main-version-29627-02-39.mp3" id="3_lvx5k"]
+[ext_resource type="Script" path="res://exit.gd" id="3_rn5l1"]
+[ext_resource type="FontFile" uid="uid://dlio61b5x10eu" path="res://Assets/Fonts/Flavors/Flavors-Regular.ttf" id="4_m37b6"]
+[ext_resource type="Script" path="res://start.gd" id="5_th45v"]
+
+[sub_resource type="Theme" id="Theme_l43gx"]
+default_font = ExtResource("2_gvrxs")
+
+[sub_resource type="Theme" id="Theme_8kji6"]
+default_font = ExtResource("4_m37b6")
+default_font_size = 100
+
+[sub_resource type="Theme" id="Theme_7di0g"]
+default_font_size = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xf753"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_right = 100
+corner_radius_bottom_left = 100
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h8kgu"]
+bg_color = Color(0.470588, 0.52549, 0.780392, 1)
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 100
+corner_radius_bottom_right = 100
+
+[node name="Node2D" type="Node2D"]
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+offset_right = 1202.0
+offset_bottom = 646.0
+theme = SubResource("Theme_l43gx")
+stream = ExtResource("1_4bdoq")
+autoplay = true
+expand = true
+loop = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="VideoStreamPlayer"]
+stream = ExtResource("3_lvx5k")
+volume_db = 24.0
+autoplay = true
+
+[node name="game_name" type="Label" parent="VideoStreamPlayer"]
+layout_mode = 0
+offset_left = 154.0
+offset_top = 126.0
+offset_right = 973.0
+offset_bottom = 255.0
+theme = SubResource("Theme_8kji6")
+text = "Mindfract"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="start" type="Button" parent="VideoStreamPlayer"]
+layout_mode = 0
+offset_left = 445.0
+offset_top = 277.0
+offset_right = 687.0
+offset_bottom = 328.0
+theme = SubResource("Theme_7di0g")
+theme_override_styles/normal = SubResource("StyleBoxFlat_xf753")
+theme_override_styles/hover = SubResource("StyleBoxFlat_h8kgu")
+text = "Start"
+script = ExtResource("5_th45v")
+
+[node name="options" type="Button" parent="VideoStreamPlayer"]
+layout_mode = 0
+offset_left = 445.0
+offset_top = 337.0
+offset_right = 687.0
+offset_bottom = 388.0
+theme = SubResource("Theme_7di0g")
+theme_override_styles/normal = SubResource("StyleBoxFlat_xf753")
+theme_override_styles/hover = SubResource("StyleBoxFlat_h8kgu")
+text = "Options"
+
+[node name="exit" type="Button" parent="VideoStreamPlayer"]
+layout_mode = 0
+offset_left = 445.0
+offset_top = 399.0
+offset_right = 687.0
+offset_bottom = 450.0
+theme = SubResource("Theme_7di0g")
+theme_override_styles/normal = SubResource("StyleBoxFlat_xf753")
+theme_override_styles/hover = SubResource("StyleBoxFlat_h8kgu")
+text = "Exit
+"
+script = ExtResource("3_rn5l1")

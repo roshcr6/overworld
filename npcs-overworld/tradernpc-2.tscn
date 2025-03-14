@@ -1,0 +1,73 @@
+[gd_scene load_steps=11 format=3 uid="uid://c04rym60ilnbj"]
+
+[ext_resource type="Texture2D" uid="uid://bj1qs0fjo62c5" path="res://Approval.png" id="1_b5y28"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cfth5"]
+atlas = ExtResource("1_b5y28")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gdlxe"]
+atlas = ExtResource("1_b5y28")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oj8uv"]
+atlas = ExtResource("1_b5y28")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tkukb"]
+atlas = ExtResource("1_b5y28")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4d1kd"]
+atlas = ExtResource("1_b5y28")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_35eem"]
+atlas = ExtResource("1_b5y28")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1hljd"]
+atlas = ExtResource("1_b5y28")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2tfnm"]
+atlas = ExtResource("1_b5y28")
+region = Rect2(896, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hiswe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cfth5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gdlxe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oj8uv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tkukb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4d1kd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_35eem")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1hljd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2tfnm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Node" type="Node"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_hiswe")
+frame_progress = 0.270229

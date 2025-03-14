@@ -1,0 +1,131 @@
+[gd_scene load_steps=12 format=3 uid="uid://dbss1dw1quyvf"]
+
+[ext_resource type="Texture2D" uid="uid://c40dfridvfube" path="res://Tile/GandalfHardcore Warrior.png" id="1_xo3ru"]
+
+[sub_resource type="GDScript" id="GDScript_xo3ru"]
+resource_name = "player"
+script/source = "extends CharacterBody2D
+
+# Exported variables for customization
+var speed = 200 # Movement speed
+var jump_force = 400 # Jump force
+var gravity = 1000 # Gravity effect
+var max_fall_speed = 600 # Maximum fall speed
+
+# Internal variables
+var is_jumping = false # To track if the character is in the air
+onready var sprite = $Sprite # Reference to the sprite node (adjust the path if necessary)
+
+# Called every frame
+func _process(delta):
+	# Handle movement and jumping
+	move_character(delta)
+
+func move_character(delta):
+	# Reset horizontal velocity
+	velocity.x = 0
+
+	# Get input from the player (left/right arrow keys or A/D)
+	if Input.is_action_pressed(\"ui_right\"):
+		velocity.x += speed
+		sprite.scale.x = 1 # Face right
+	if Input.is_action_pressed(\"ui_left\"):
+		velocity.x -= speed
+		sprite.scale.x = -1 # Face left
+
+	# Apply gravity
+	if not is_on_floor():
+		velocity.y += gravity * delta
+		# Limit the maximum fall speed
+		if velocity.y > max_fall_speed:
+			velocity.y = max_fall_speed
+	else:
+		# Reset jumping flag when grounded
+		is_jumping = false
+
+	# Jumping
+	if Input.is_action_pressed(\"ui_up\") and is_on_floor() and not is_jumping:
+		velocity.y = -jump_force
+		is_jumping = true
+
+	# Move the character using the calculated velocity
+	move_and_slide(velocity, Vector2.UP)
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hjaqi"]
+atlas = ExtResource("1_xo3ru")
+region = Rect2(0, 0, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fvtld"]
+atlas = ExtResource("1_xo3ru")
+region = Rect2(400, 128, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ct4mp"]
+atlas = ExtResource("1_xo3ru")
+region = Rect2(320, 128, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s4jxa"]
+atlas = ExtResource("1_xo3ru")
+region = Rect2(240, 128, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oh5ij"]
+atlas = ExtResource("1_xo3ru")
+region = Rect2(160, 192, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hp4bs"]
+atlas = ExtResource("1_xo3ru")
+region = Rect2(80, 192, 80, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oh5ij"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hjaqi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fvtld")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ct4mp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s4jxa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oh5ij")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hp4bs")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_hp4bs"]
+distance = -42.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hjaqi"]
+radius = 13.0
+height = 66.0
+
+[node name="player" type="CharacterBody2D"]
+texture_filter = 1
+script = SubResource("GDScript_xo3ru")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1.5, -8.5)
+scale = Vector2(1.23438, 1.25781)
+sprite_frames = SubResource("SpriteFrames_oh5ij")
+autoplay = "default"
+frame_progress = 0.306855
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 1)
+shape = SubResource("WorldBoundaryShape2D_hp4bs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, -1)
+shape = SubResource("CapsuleShape2D_hjaqi")
